@@ -1,9 +1,11 @@
-import { ClerkProvider } from "@clerk/nextjs";
-import "./globals.css";
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Open_Sans } from "next/font/google";
+
+import "./globals.css";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import { cn } from "@/lib/utils";
+import ModalProvider from "@/components/provider/modal-provider";
 
 const open_Sans = Open_Sans({ subsets: ["latin"] });
 
@@ -20,13 +22,14 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={cn(open_Sans.className,"bg-white dark:bg-[#313338]")}>
+        <body className={cn(open_Sans.className, "bg-white dark:bg-[#313338]")}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem={false}
             storageKey="discord-clone"
           >
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </body>
