@@ -34,7 +34,6 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
       },
     },
   });
-
   if (!server) {
     return redirect("/");
   }
