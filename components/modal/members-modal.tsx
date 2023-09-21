@@ -56,6 +56,7 @@ const MembersModal = () => {
 
   const onRole = async (memberId: string, role: MemberRole) => {
     try {
+      console.log(memberId);
       setLoadingId(memberId);
       const url = qs.stringifyUrl({
         url: `/api/members/${memberId}`,
@@ -65,6 +66,25 @@ const MembersModal = () => {
         },
       });
       const response = await axios.patch(url, { role });
+      router.refresh();
+
+      onOpen("members", { server: response.data });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoadingId("");
+    }
+  };
+  const onKick = async (memberId: string) => {
+    try {
+      setLoadingId(memberId);
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id,
+        },
+      });
+      const response = await axios.delete(url);
       router.refresh();
       onOpen("members", { server: response.data });
     } catch (error) {
@@ -100,7 +120,7 @@ const MembersModal = () => {
                 </p>
               </div>
               {server.profileId !== member.profileId &&
-                loadingId !== member.id && (
+                loadingId !== member?.id && (
                   <div className="ml-auto">
                     <DropdownMenu>
                       <DropdownMenuTrigger>
@@ -136,7 +156,7 @@ const MembersModal = () => {
                           </DropdownMenuPortal>
                         </DropdownMenuSub>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => onKick(member?.id)}>
                           <Gavel className="h-4 w-4 mr-2" />
                           Kick
                         </DropdownMenuItem>
