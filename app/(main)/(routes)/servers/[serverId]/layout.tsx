@@ -27,7 +27,8 @@ const ServerIdLayout = async ({
       },
     },
   });
-  if (!servers) {
+
+  if (servers.length === 0) { 
     return redirect("/");
   }
   return (
