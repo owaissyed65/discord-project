@@ -28,7 +28,7 @@ const NavigationBar = async () => {
     },
   });
   return (
-    <div className="space-y-4 w-full h-full py-3 text-primary bg-primary/10 flex flex-col items-center dark:bg-[#1e1f22]">
+    <div className="space-y-4 w-full h-full py-3 text-primary bg-[#e3e5e8] flex flex-col items-center dark:bg-[#1e1f22]">
       {/* <ModalProvider /> */}
       <NavigationAction />
       <Separator className="h-0.5 bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
