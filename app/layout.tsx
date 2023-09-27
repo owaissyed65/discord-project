@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/provider/theme-provider";
 import { cn } from "@/lib/utils";
 import ModalProvider from "@/components/provider/modal-provider";
 
+
 const open_Sans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,7 +19,9 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
+
 }) {
+
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>

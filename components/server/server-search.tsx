@@ -13,6 +13,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { useParams, useRouter } from "next/navigation";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface ServerSearchProps {
   data?: {
@@ -67,6 +68,7 @@ const ServerSearch = ({ data }: ServerSearchProps) => {
         <CommandInput placeholder="Search all channels and members..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
+          <ScrollArea className="h-[250px]">
           {data?.map(({ data, label, type }) => {
             if (data?.length === 0) return null;
             return (
@@ -80,6 +82,7 @@ const ServerSearch = ({ data }: ServerSearchProps) => {
               </CommandGroup>
             );
           })}
+          </ScrollArea>
         </CommandList>
       </CommandDialog>
     </>
