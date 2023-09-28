@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
 
@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Member, MemberRole, Profile, Server } from "@prisma/client";
 
 import UserAvatar from "@/components/user-avatar";
+import ActionTooltip from "../action-tooltip";
 
 interface ServerMemberProps {
   member: Member & {
@@ -27,9 +28,15 @@ const ServerMember = ({ member, server }: ServerMemberProps) => {
   const router = useRouter();
   const params = useParams();
   const Icon = roleIconMap.get(member?.role);
-  // console.log(member?.profile)
+  
+  
+  const onClick = () => {
+    router.push(`/servers/${params?.serverId}/conversations/${member?.id}`);
+  };
   return (
+    <ActionTooltip align="end" side="top" label={member?.role}>
     <button
+      onClick={onClick}
       className={cn(
         "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1",
         params?.memberId === member?.id && "bg-zinc-700/20 dark:bg-zinc-700"
@@ -42,13 +49,15 @@ const ServerMember = ({ member, server }: ServerMemberProps) => {
       <p
         className={cn(
           "font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
-          params?.channelId === member?.id && "text-primary dark:text-zinc-200 dark:group-hover:text-white"
+          params?.memberId === member?.id &&
+            "text-primary dark:text-zinc-200 dark:group-hover:text-white"
         )}
       >
         {member?.profile?.name}
       </p>
       {Icon}
     </button>
+    </ActionTooltip>
   );
 };
 

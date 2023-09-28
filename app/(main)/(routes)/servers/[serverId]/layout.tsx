@@ -17,7 +17,6 @@ const ServerIdLayout = async ({
   if (!profile) {
     return redirectToSignIn();
   }
-
   const servers = await db.server.findMany({
     where: {
       members: {

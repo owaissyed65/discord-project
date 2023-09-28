@@ -20,7 +20,7 @@ export const POST = async (req: Request) => {
         channels: {
           create: [
             {
-              name,
+              name:"general",
               profileId: profile.id,
             },
           ],
