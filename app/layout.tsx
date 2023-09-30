@@ -6,7 +6,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import { cn } from "@/lib/utils";
 import ModalProvider from "@/components/provider/modal-provider";
-
+import { SocketProvider } from "@/components/provider/socket-provider";
 
 const open_Sans = Open_Sans({ subsets: ["latin"] });
 
@@ -19,9 +19,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-
 }) {
-
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
@@ -32,8 +30,10 @@ export default function RootLayout({
             enableSystem={false}
             storageKey="discord-clone"
           >
-            <ModalProvider />
-            {children}
+            <SocketProvider>
+              <ModalProvider />
+              {children}
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>
