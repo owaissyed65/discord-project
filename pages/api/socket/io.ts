@@ -8,16 +8,19 @@ export const config = {
     bodyParser: false,
   },
 };
-export const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
+export default function ioHandler(
+  req: NextApiRequest,
+  res: NextApiResponseServerIO
+) {
   if (!res.socket.server.io) {
     const path = "/api/socket/io";
     const httpServer: NetServer = res.socket.server as any;
     const io = new SocketIo(httpServer, {
-      path,
+      path: path,
       // @ts-ignore
       addTrailingSlash: false,
     });
     res.socket.server.io = io;
   }
-  res.end()
-};
+  res.end();
+}
