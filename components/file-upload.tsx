@@ -38,7 +38,9 @@ export const FileUpload = ({ onChange, value, endPoint }: FileUploadProps) => {
           target="_blank"
           rel="noopener noreferrer"
           className="ml-2 text-sm text-indigo-500 dark:text-indigo-400 hover:underline"
-        ></a>
+        >
+          {value}
+        </a>
         <div
           className="bg-rose-500 text-white p-1 rounded-full absolute -top-2 flex justify-center items-center cursor-pointer -right-2 shadow-sm"
           onClick={() => onChange("")}

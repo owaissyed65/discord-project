@@ -95,7 +95,7 @@ const MessageFileModal = () => {
               </div>
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4 ">
-              <Button type="submit" disabled={isLoading}>
+              <Button type="submit" disabled={isLoading} variant={"primary"}>
                 Send
               </Button>
             </DialogFooter>

@@ -1,9 +1,13 @@
+import React from "react";
+import { redirect } from "next/navigation";
+
+import { db } from "@/lib/db";
+
 import ChatHeader from "@/components/chat/chat-header";
 import ChatInput from "@/components/chat/chat-input";
+import ChatMessages from "@/components/chat/chat-messages";
 import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-import { redirect } from "next/navigation";
-import React from "react";
+
 interface ChannelIdProps {
   params: {
     channelId: string;
@@ -39,7 +43,20 @@ const ChannelId = async ({ params }: ChannelIdProps) => {
         name={channel?.name}
         type="channel"
       />
-      <div className="flex-1">future message</div>
+      <ChatMessages
+        member={member}
+        name={channel.name}
+        chatId={channel.id}
+        type="channel"
+        apiUrl="/api/messages"
+        socketUrl="/api/socket/messages"
+        socketQuery={{
+          channelId: channel?.id,
+          serverId: channel?.serverId,
+        }}
+        paramKey="channelId"
+        paramValue={channel?.id}
+      />
       <ChatInput
         name={channel?.name}
         apiUrl="/api/socket/messages"

@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useModal } from "@/hooks/use-modal-store";
+import EmojiPicker from "@/components/emoji-picker";
 
 interface ChatInputProps {
   query: Record<string, any>;
@@ -68,7 +69,7 @@ const ChatInput = ({ apiUrl, name, query, type }: ChatInputProps) => {
                     {...field}
                   />
                   <div className="absolute top-7 right-8 ">
-                    <Smile />
+                    <EmojiPicker onChange={(emoji: any) => field.onChange(`${field.value}${emoji}`)} />
                   </div>
                 </div>
               </FormControl>
