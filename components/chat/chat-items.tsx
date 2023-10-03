@@ -68,10 +68,11 @@ const ChatItem = ({
 
     router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
   };
-
   useEffect(() => {
     const handleKeyDown = (event: any) => {
-      if (event.key === "escape" || event.keyCode === 27) {
+      console.log("Key pressed:", event.key);
+      console.log("isEditing before toggle:", isEditing,content);
+      if (event.key === "escape" || event.keyCode === 27 || event.keyCode === 32 || event.key === " ") {
         setIsEditing(false);
       }
       console.log("keydown");
