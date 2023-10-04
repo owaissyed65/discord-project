@@ -60,7 +60,7 @@ export const GET = async (req: Request) => {
       nextCursor = message[MESSAGE_BATCH - 1].id;
     }
     return NextResponse.json({
-      item: message,
+      items: message,
       nextCursor: nextCursor,
     });
   } catch (error) {

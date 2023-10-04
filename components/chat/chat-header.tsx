@@ -1,9 +1,10 @@
-"use client";
+// "use client";
 import { Hash, Menu } from "lucide-react";
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import MobileToggle from "@/components/mobile-toggle";
 import UserAvatar from "../user-avatar";
 import SocketIndicator from "@/components/socket-indicator";
+import { ChatVideoButton } from "./chat-video-button";
 interface ChatHeaderProps {
   serverId: string;
   name: string;
@@ -11,14 +12,14 @@ interface ChatHeaderProps {
   imageUrl?: string;
 }
 const ChatHeader = ({ name, serverId, type, imageUrl }: ChatHeaderProps) => {
-  const [isMounted, setMounted] = useState(false);
+  // const [isMounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  if (!isMounted) {
-    return null;
-  }
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, []);
+  // if (!isMounted) {
+  //   return null;
+  // }
   return (
     <div className="text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2">
       <MobileToggle serverId={serverId} />
@@ -29,7 +30,11 @@ const ChatHeader = ({ name, serverId, type, imageUrl }: ChatHeaderProps) => {
         <UserAvatar src={imageUrl!} className="h-8 w-8 md:h-8 md:w-8 mr-2" />
       )}
       <p className="font-semibold text-md text-black dark:text-white">{name}</p>
-      <div className="ml-auto flex items-center"><SocketIndicator/></div>
+
+      <div className="ml-auto flex items-center">
+        {type === "conversation" && <ChatVideoButton />}
+        <SocketIndicator />
+      </div>
     </div>
   );
 };

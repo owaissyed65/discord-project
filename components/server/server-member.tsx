@@ -16,18 +16,15 @@ interface ServerMemberProps {
   server: Server;
 }
 
-const roleIconMap = new Map([
-  [MemberRole.GUEST, null],
-  [
-    MemberRole.MODERATOR,
-    <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
-  ],
-  [MemberRole.ADMIN, <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />],
-]);
+const roleIconMap = {
+  ADMIN: null,
+  MODERATOR: <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
+  GUEST: <ShieldCheck className="h-4 w-4 ml-2 text-rose-500" />,
+};
 const ServerMember = ({ member, server }: ServerMemberProps) => {
   const router = useRouter();
   const params = useParams();
-  const Icon = roleIconMap.get(member?.role);
+  const Icon = roleIconMap[member?.role];
   
   
   const onClick = () => {

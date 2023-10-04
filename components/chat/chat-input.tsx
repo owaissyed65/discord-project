@@ -30,13 +30,16 @@ const ChatInput = ({ apiUrl, name, query, type }: ChatInputProps) => {
     },
   });
   const isLoading = form.formState.isSubmitting;
+  
   const onSubmit = async (value: z.infer<typeof formSchema>) => {
     try {
+      form.reset();
       const url = qs.stringifyUrl({
         url: apiUrl,
         query: query,
       });
       await axios.post(url, value);
+      
     } catch (error) {
       console.log("CHAT_INPUT ERROR", error);
     }
@@ -56,6 +59,7 @@ const ChatInput = ({ apiUrl, name, query, type }: ChatInputProps) => {
                     onClick={() => {
                       onOpen("messageFile", { apiUrl, query });
                     }}
+                    disabled={isLoading}
                     className="absolute top-7 left-8 h-[24px] w-[24px] bg-zinc-500 dark:bg-zinc-400 hover:bg-zinc-600 dark:hover:bg-zinc-300 rounded-full transition p-1 flex items-center justify-center"
                   >
                     <Plus className="text-white dark:text-[#313338]" />

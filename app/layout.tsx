@@ -3,6 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Open_Sans } from "next/font/google";
 
 import "./globals.css";
+import "@uploadthing/react/styles.css";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import { cn } from "@/lib/utils";
 import ModalProvider from "@/components/provider/modal-provider";

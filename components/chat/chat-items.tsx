@@ -70,12 +70,14 @@ const ChatItem = ({
   };
   useEffect(() => {
     const handleKeyDown = (event: any) => {
-      console.log("Key pressed:", event.key);
-      console.log("isEditing before toggle:", isEditing,content);
-      if (event.key === "escape" || event.keyCode === 27 || event.keyCode === 32 || event.key === " ") {
+      if (
+        event.key === "Escape" ||
+        event.keyCode === 27
+        // event.keyCode === 32 ||
+        // event.key === " "
+      ) {
         setIsEditing(false);
       }
-      console.log("keydown");
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -111,7 +113,7 @@ const ChatItem = ({
     form.reset({
       content: content,
     });
-  }, [content]);
+  }, [content,form]);
 
   const fileType = fileUrl?.split(".").pop();
 
@@ -239,7 +241,15 @@ const ChatItem = ({
             </ActionTooltip>
           )}
           <ActionTooltip label="Delete" align="center" side="top">
-            <Trash className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition" />
+            <Trash
+              className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+              onClick={() =>
+                onOpen("deleteMessage", {
+                  apiUrl: `${socketUrl}/${id}`,
+                  query: socketQuery,
+                })
+              }
+            />
           </ActionTooltip>
         </div>
       )}

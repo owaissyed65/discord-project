@@ -64,17 +64,18 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
     (member) => member.profileId === profile.id
   )?.role;
 
-  const iconMap = new Map([
-    [ChannelType.TEXT, <Hash className="mr-2 h-4 w-4" />],
-    [ChannelType.AUDIO, <Mic className="mr-2 h-4 w-4" />],
-    [ChannelType.VIDEO, <Video className="mr-2 h-4 w-4" />],
-  ]);
+  const iconMap = {
+    TEXT: <Hash className="mr-2 h-4 w-4" />,
+    AUDIO: <Mic className="mr-2 h-4 w-4" />,
+    VIDEO: <Video className="mr-2 h-4 w-4" />,
+  };
 
-  const roleIconMap = new Map([
-    ["ADMIN", null],
-    ["MODERATOR", <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />],
-    ["GUEST", <ShieldCheck className="h-4 w-4 ml-2 text-rose-500" />],
-  ]);
+  const roleIconMap = {
+    ADMIN: null,
+    MODERATOR: <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
+    GUEST: <ShieldCheck className="h-4 w-4 ml-2 text-rose-500" />,
+  };
+
   // console.log(server);
   return (
     <div className="flex flex-col h-full text-primary w-full dark:bg-[#2b2d31] bg-[#f2f3f5]">
@@ -89,7 +90,7 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                 data: textChannels?.map((channel) => ({
                   name: channel?.name,
                   id: channel?.id,
-                  icon: iconMap.get(channel?.type),
+                  icon:  iconMap[channel?.type],
                 })),
               },
               {
@@ -98,7 +99,7 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                 data: audioChannels?.map((channel) => ({
                   name: channel?.name,
                   id: channel?.id,
-                  icon: iconMap.get(channel?.type),
+                  icon: iconMap[channel?.type],
                 })),
               },
               {
@@ -107,7 +108,7 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                 data: videoChannels?.map((channel) => ({
                   name: channel?.name,
                   id: channel?.id,
-                  icon: iconMap.get(channel?.type),
+                  icon: iconMap[channel?.type],
                 })),
               },
               {
@@ -116,7 +117,7 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                 data: members?.map((member) => ({
                   name: member?.profile?.name,
                   id: member?.profile?.id,
-                  icon: roleIconMap.get(member?.role),
+                  icon: roleIconMap[member?.role],
                 })),
               },
             ]}

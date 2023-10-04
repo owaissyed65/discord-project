@@ -1,3 +1,4 @@
+
 // import React, { useEffect, useState } from "react";
 import {
   Sheet,
@@ -21,7 +22,7 @@ const MobileToggle = ({ serverId }: { serverId: string }) => {
 
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger asChild>
         <Button variant={"ghost"} size={"icon"} className="md:hidden">
           <Menu />
         </Button>

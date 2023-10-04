@@ -45,11 +45,11 @@ import { useRouter } from "next/navigation";
 const MembersModal = () => {
   const { type, isOpen, onClose, data, onOpen } = useModal();
   const router = useRouter();
-  const roleIconMap = new Map([
-    ["ADMIN", null],
-    ["MODERATOR", <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />],
-    ["GUEST", <ShieldCheck className="h-4 w-4 ml-2 text-rose-500" />],
-  ]);
+  const roleIconMap = {
+    ADMIN: null,
+    MODERATOR: <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
+    GUEST: <ShieldCheck className="h-4 w-4 ml-2 text-rose-500" />,
+  };
   const isModal = isOpen && type === "members";
   const { server } = data as { server: serverWithMembersWithProfie };
   const [loadingId, setLoadingId] = useState("");
@@ -113,7 +113,7 @@ const MembersModal = () => {
               <div className="flex flex-col gap-y-1">
                 <div className="text-xs font-semibold flex items-center">
                   {member?.profile?.name}
-                  {roleIconMap.get(member.role)}
+                  {roleIconMap[member?.role]}
                 </div>
                 <p className="text-xs text-zinc-500 flex items-center">
                   {member?.profile?.email}
