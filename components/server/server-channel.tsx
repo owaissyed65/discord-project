@@ -20,12 +20,12 @@ const iconMap = new Map([
   [ChannelType.VIDEO, Video],
 ]);
 const ServerChannel = ({ server, channel, role }: ServerChannelProps) => {
-  const params = useParams();
+  const params = useParams() ;
   const router = useRouter();
   const Icon = iconMap.get(channel.type) as React.ElementType;
   const { onOpen } = useModal();
   const onClick = () => {
-    router.push(`/servers/${params.serverId}/channels/${channel?.id}`);
+    router.push(`/servers/${params?.serverId}/channels/${channel?.id}`);
   };
   const onAction = (e: React.MouseEvent, type: ModalType) => {
     e.stopPropagation();
